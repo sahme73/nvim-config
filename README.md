@@ -10,3 +10,5 @@
 
 1. `dnf install ripgrep`
 2. `dnf install fd-find`
+3. `dnf install diffutils`
+4. ...
