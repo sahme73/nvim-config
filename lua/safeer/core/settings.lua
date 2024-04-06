@@ -3,6 +3,7 @@ vim.opt.clipboard = 'unnamedplus' -- Share clipboard between system and editor
 
 vim.opt.number = true -- Line numbers
 vim.opt.guicursor = "n:block,i:block" -- Block cursor in normal and insert mode
+vim.opt.termguicolors = true -- Wider color palette
 
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.tabstop = 4 -- Number of spaces tabs count for
