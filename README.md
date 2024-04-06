@@ -18,3 +18,5 @@
 8. `dnf install maven`
 9. `dnf install npm`
 10. `npx ts-node`
+
+Must rebuild all mason.nvim LSP installations on destination machine due to hard path links.
