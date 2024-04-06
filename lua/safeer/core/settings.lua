@@ -1,5 +1,5 @@
-vim.opt.mouse = 'a'
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.mouse = 'a' -- Better mouse utilization
+vim.opt.clipboard = 'unnamedplus' -- Share clipboard between system and editor
 
 vim.opt.number = true -- Line numbers
 vim.opt.guicursor = "n:block,i:block" -- Block cursor in normal and insert mode
