@@ -9,7 +9,7 @@
 
 ### External Dependencies
 
-Use `yum --nogpgcheck` on offline machines setup with static repositories or `dnf`.
+Use `yum --nogpgcheck` on offline machines setup with static repositories or `dnf` on online machines.
 
 #### Base Installation
 1. `yum install --nogpgcheck ripgrep`
