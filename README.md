@@ -28,6 +28,7 @@ Cannot prepackage mason.nvim LSP installations because must rebuild all LSP inst
 2. `dnf install java-latest-openjdk-devel.x86_64`
 3. `dnf install java`
 4. `dnf install maven`
+5. download, extract, and link `jdtl` from `http://download.eclipse.org/jdtls/milestones/?d` to `/usr/bin/jdtls`
 
 #### Typescript LSP
 1. `dnf install npm`
