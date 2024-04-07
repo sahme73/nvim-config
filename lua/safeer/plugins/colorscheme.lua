@@ -16,6 +16,7 @@ return {
             hi LineNr guifg=#FFFFFF guibg=NONE ctermbg=NONE
             hi CursorLine guifg=NONE guibg=#646464 gui=NONE
             hi LazyNormal guifg=#ABB2BF guibg=#282C34
+            hi SignColumn guibg=NONE
         ]])
     end,
 }

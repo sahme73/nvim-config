@@ -31,4 +31,5 @@ Cannot prepackage mason.nvim LSP installations because must rebuild all LSP inst
 
 #### Typescript LSP
 1. `dnf install npm`
-2. `npx ts-node`
+2. `npm install -g typescript typescript-language-server`
+3. `npx ts-node` to run individual typescript files
