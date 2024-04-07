@@ -12,10 +12,10 @@
 Use `yum --nogpgcheck` on offline machines setup with static repositories or `dnf`.
 
 #### Base Installation
-1. `dnf install ripgrep`
-2. `dnf install fd-find`
-3. `dnf install diffutils`
-4. `dnf install unzip`
+1. `yum install --nogpgcheck ripgrep`
+2. `yum install --nogpgcheck fd-find`
+3. `yum install --nogpgcheck diffutils`
+4. `yum install --nogpgcheck unzip`
 
 Cannot prepackage mason.nvim LSP installations because must rebuild all LSP installations on destination machine due to hard path links.
 
@@ -24,13 +24,13 @@ Cannot prepackage mason.nvim LSP installations because must rebuild all LSP inst
 2. `yum install --nogpgcheck clang-tools-extra`
 
 #### Java LSP
-1. `dnf install java-21-openjdk-jmods`
-2. `dnf install java-latest-openjdk-devel.x86_64`
-3. `dnf install java`
-4. `dnf install maven`
+1. `yum install --nogpgcheck java-21-openjdk-jmods`
+2. `yum install --nogpgcheck java-latest-openjdk-devel.x86_64`
+3. `yum install --nogpgcheck java`
+4. `yum install --nogpgcheck maven`
 5. download, extract, and link `jdtl` from `http://download.eclipse.org/jdtls/milestones/?d` to `/usr/bin/jdtls`
 
 #### Typescript LSP
-1. `dnf install npm`
-2. `npm install -g typescript typescript-language-server`
+1. `yum install --nogpgcheck npm`
+2. `npm install -g typescript typescript-language-server` (transfer node module from online machine `npm root -g`
 3. `npx ts-node` to run individual typescript files
