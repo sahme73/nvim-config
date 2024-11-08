@@ -18,7 +18,7 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 -- Setup the servers
-lsp_zero.setup_servers({"clangd", "jdtls", "tsserver"})
+lsp_zero.setup_servers({"clangd", "jdtls", "ts_ls"})
 
 ---
 -- Autocompletion
