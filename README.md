@@ -34,3 +34,11 @@ Cannot prepackage mason.nvim LSP installations because must rebuild all LSP inst
 1. `yum install --nogpgcheck npm`
 2. `npm install -g typescript typescript-language-server` (transfer node module from online machine `npm root -g`)
 3. `npx ts-node` to run individual typescript files
+
+### Hotkeys
+1. `leader ps` search for a term
+2. `leader pf` search for a file
+3. `leader pc` close the current tab
+4. `gt`        cycle to the next tab
+5. `gT`        cycle to the previous tab
+
