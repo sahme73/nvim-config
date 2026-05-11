@@ -38,6 +38,7 @@ vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 vim.pack.add({
     { src = "https://github.com/folke/tokyonight.nvim" },
     { src = "https://github.com/saghen/blink.cmp" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
 })
 
 -- Colors
@@ -71,3 +72,19 @@ vim.cmd(":hi BlinkCmpMenu guibg=NONE")       -- Completion menu background
 vim.cmd(":hi BlinkCmpMenuBorder guibg=NONE") -- Completion menu border
 vim.cmd(":hi BlinkCmpDoc guibg=NONE")        -- Documentation window background
 vim.cmd(":hi BlinkCmpDocBorder guibg=NONE")  -- Documentation window border
+
+-- Sticky Scroll
+require("treesitter-context").setup({
+    max_lines = 3,           -- Cap how many context lines stack at the top
+    multiline_threshold = 1, -- Collapse multiline signatures to the first line
+    trim_scope = "outer",    -- Drop outer scopes first when over "max_lines"
+    min_window_height = 20,  -- Disable in tiny splits
+    separator = nil,         -- Set to "-" to add a divider line
+})
+vim.cmd(":hi TreesitterContext guibg=NONE")
+vim.cmd(":hi TreesitterContextLineNumber guibg=NONE")
+vim.cmd(":hi TreesitterContextBottom gui=underline guisp=#3b4261")
+
+vim.keymap.set("n", "[c", function()
+    require("treesitter-context").go_to_context(vim.v.count1)
+end, { silent = true, desc = "Jump to context" })

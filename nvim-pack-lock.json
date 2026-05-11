@@ -4,6 +4,10 @@
       "rev": "6a4914ca987453464a7dfc7fc237a992adb567d0",
       "src": "https://github.com/saghen/blink.cmp"
     },
+    "nvim-treesitter-context": {
+      "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
+    },
     "tokyonight.nvim": {
       "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
       "src": "https://github.com/folke/tokyonight.nvim"
