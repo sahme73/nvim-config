@@ -59,6 +59,7 @@ vim.lsp.enable({
     "kotlin_language_server", -- Kotlin
     "lemminx",                -- XML
     "lua_ls",                 -- Lua
+    "make_ls",                -- Makefile
     "mesonlsp",               -- Meson
     "pyright",                -- Python
     "ts_ls"                   -- Typescript
