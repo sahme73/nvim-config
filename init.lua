@@ -57,6 +57,7 @@ vim.lsp.enable({
     "fish_lsp",               -- Fish
     "jdtls",                  -- Java
     "kotlin_language_server", -- Kotlin
+    "lemminx",                -- XML
     "lua_ls",                 -- Lua
     "mesonlsp",               -- Meson
     "pyright",                -- Python
