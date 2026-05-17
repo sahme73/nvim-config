@@ -36,9 +36,11 @@ vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 
 -- Plugins
 vim.pack.add({
-    { src = "https://github.com/folke/tokyonight.nvim" },
-    { src = "https://github.com/saghen/blink.cmp" },
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
+    { src = "https://github.com/folke/tokyonight.nvim" },                   -- Color theme
+    { src = "https://github.com/saghen/blink.cmp" },                        -- Code completion
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" }, -- For sticky scroll context
+    { src = "https://codeberg.org/mfussenegger/nvim-jdtls.git" },           -- Java LSP extensions
+    { src = "https://github.com/j-hui/fidget.nvim.git" },                   -- Notification/progress status
 })
 
 -- Colors
@@ -48,8 +50,18 @@ vim.cmd(":hi statusline guibg=NONE")    -- Transparent bottom bar
 vim.cmd(":hi FloatBorder guibg=NONE")   -- Transparent border background
 vim.cmd(":hi NormalFloat guibg=NONE")   -- Transparent float window background
 
--- LSPs
-vim.lsp.enable({ "lua_ls", "zls" })
+-- Language Server Protocols (LSPs)
+vim.lsp.enable({
+    "bashls",                 -- Ba/sh
+    "clangd",                 -- C/C++/CUDA
+    "fish_lsp",               -- Fish
+    "jdtls",                  -- Java
+    "kotlin_language_server", -- Kotlin
+    "lua_ls",                 -- Lua
+    "mesonlsp",               -- Meson
+    "pyright",                -- Python
+    "ts_ls"                   -- Typescript
+})
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })

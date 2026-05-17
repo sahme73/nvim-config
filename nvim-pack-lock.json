@@ -4,6 +4,14 @@
       "rev": "6a4914ca987453464a7dfc7fc237a992adb567d0",
       "src": "https://github.com/saghen/blink.cmp"
     },
+    "fidget.nvim": {
+      "rev": "889e2e96edef4e144965571d46f7a77bcc4d0ddf",
+      "src": "https://github.com/j-hui/fidget.nvim.git"
+    },
+    "nvim-jdtls": {
+      "rev": "77ccaeb422f8c81b647605da5ddb4a7f725cda90",
+      "src": "https://codeberg.org/mfussenegger/nvim-jdtls.git"
+    },
     "nvim-treesitter-context": {
       "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
