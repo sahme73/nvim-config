@@ -70,6 +70,8 @@ vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" 
 vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
 
+require("fidget").setup({}) -- LSP progress notifications
+
 -- Completions
 require("blink.cmp").setup({
     keymap = { preset = "default" },
