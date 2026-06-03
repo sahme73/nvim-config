@@ -34,7 +34,7 @@ vim.opt.spelloptions:append("camel") -- Check each part of CamelCased words indi
 vim.g.mapleader = " "
 
 vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], { noremap = true })
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+--vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<leader>ca", function()
@@ -50,6 +50,11 @@ vim.pack.add({
     { src = "https://codeberg.org/mfussenegger/nvim-jdtls.git" },           -- Java LSP extensions
     { src = "https://github.com/j-hui/fidget.nvim.git" },                   -- Notification/progress status
     { src = "https://github.com/lewis6991/gitsigns.nvim" },                 -- Git gutter
+    { src = "https://github.com/nvim-tree/nvim-tree.lua" },                 -- File explorer
+    { src = "https://github.com/danymat/neogen" },                          -- Annotation generation
+    { src = "https://github.com/mfussenegger/nvim-dap" },                   -- Debug Adapter Protocol (DAP) client
+    { src = "https://github.com/nvim-neotest/nvim-nio" },                   -- Asynchronous I/O
+    { src = "https://github.com/rcarriga/nvim-dap-ui" },                    -- DAP UI
 })
 
 -- Colors
@@ -114,6 +119,82 @@ vim.cmd(":hi BlinkCmpMenuBorder guibg=NONE") -- Completion menu border
 vim.cmd(":hi BlinkCmpDoc guibg=NONE")        -- Documentation window background
 vim.cmd(":hi BlinkCmpDocBorder guibg=NONE")  -- Documentation window border
 
+-- Debug Adapter Protocol
+local dap = require("dap")
+
+-- Adapters
+dap.adapters.lldb = {
+    type = "executable",
+    command = "/usr/bin/lldb-dap",
+    name = "lldb",
+}
+
+local debugpy_python = vim.fn.expand("~/.venvs/debugpy/bin/python")
+dap.adapters.python = {
+    type = "executable",
+    command = debugpy_python,
+    args = { "-m", "debugpy.adapter" },
+}
+
+-- Configurations
+dap.configurations.cpp = { -- C++
+    {
+        name = "Launch executable",
+        type = "lldb",
+        request = "launch",
+        program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+        end,
+        cwd = "${workspaceFolder}",
+        args = {},
+        stopOnEntry = true,
+        runInTerminal = true, -- Set for programs needing a tty/stdin
+    },
+}
+dap.configurations.c = dap.configurations.cpp    -- C
+dap.configurations.rust = dap.configurations.cpp -- Rust
+dap.configurations.zig = dap.configurations.cpp  -- Zig
+dap.configurations.python = {
+    {
+        type = "python",
+        request = "launch",
+        name = "Launch file",
+        program = "${file}",
+        console = "integratedTerminal",
+        -- Interpreter to run the debugger
+        pythonPath = function()
+            local venv = os.getenv("VIRTUAL_ENV")
+            if venv then return venv .. "/bin/python" end
+            return debugpy_python
+        end,
+    },
+}
+
+-- Debug Adapter Protocol User Interface
+
+local dapui = require("dapui")
+dapui.setup()
+
+dap.listeners.before.launch.dapui_config = function() dapui.open() end
+dap.listeners.before.attach.dapui_config = function() dapui.open() end
+dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
+
+vim.keymap.set("n", "<F5>", function() dap.continue() end)
+vim.keymap.set("n", "<F10>", function() dap.step_over() end)
+vim.keymap.set("n", "<F11>", function() dap.step_into() end)
+vim.keymap.set("n", "<F12>", function() dap.step_out() end)
+vim.keymap.set("n", "<leader>b", function() dap.toggle_breakpoint() end)
+vim.keymap.set("n", "<leader>B", function() dap.set_breakpoint(vim.fn.input("Condition: ")) end)
+vim.keymap.set("n", "<leader>dr", function() dap.repl.open() end)
+vim.keymap.set("n", "<leader>du", function() dapui.toggle() end)
+
+-- Annotations
+require('neogen').setup {
+    enabled = true,
+    input_after_comment = true,
+}
+
 -- Sticky Scroll
 require("treesitter-context").setup({
     max_lines = 3,           -- Cap how many context lines stack at the top
@@ -131,3 +212,19 @@ vim.keymap.set("n", "[c", function()
 end, { silent = true, desc = "Jump to context" })
 
 vim.treesitter.language.register("tsx", { "typescriptreact", "javascriptreact" })
+
+-- File Explorer
+require("nvim-tree").setup({
+    filters = {
+        dotfiles = true, -- Show hidden files
+    },
+    update_focused_file = {
+        enable = true,
+        update_root = true,
+    },
+    view = {
+        width = 35,
+    },
+})
+
+vim.keymap.set("n", "<leader>pv", "<Cmd>NvimTreeFocus<CR>", { desc = "Focus on File Explorer" })
